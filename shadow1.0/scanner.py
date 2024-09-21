@@ -25,6 +25,13 @@ def _scan(_ip, _prt, _wait, _time, abort_event):
     except:
         print('\033[1m\033[31mCritical error encountered crafting SYN packet!')
         _ports.remove(int(_prt))
+    finally:
+        # close the hanging socket with a RST
+        try:
+            _reset = IP(dst=ip)/TCP(dport=int(_prt), flags="R")
+            send(_reset, verbose=False)
+        except:
+            pass
         
     # sleep for x amount of milliseconds
     start_time = time.perf_counter()
