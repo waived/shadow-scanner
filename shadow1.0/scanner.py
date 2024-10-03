@@ -28,7 +28,7 @@ def _scan(_ip, _prt, _wait, _time, abort_event):
     finally:
         # close the hanging socket with a RST
         try:
-            _reset = IP(dst=ip)/TCP(dport=int(_prt), flags="R")
+            _reset = IP(dst=_ip)/TCP(dport=int(_prt), flags="R")
             send(_reset, verbose=False)
         except:
             pass
