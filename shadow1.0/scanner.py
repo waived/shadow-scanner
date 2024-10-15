@@ -125,7 +125,7 @@ def main():
             while True:
                 if _alive != int(_thdz):
                     x = threading.Thread(target=_scan, args=(_ip, _prt, _wait, _time, abort_event))
-                    x.daemonized = True
+                    x.daemon = True
                     x.start()
                     break
     except KeyboardInterrupt:
